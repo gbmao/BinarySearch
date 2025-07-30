@@ -1,23 +1,29 @@
 public class SearchUtils {
 
-    public static int search(int[] array, int target){
+    public static String search(int[] array, int target){
 
         //encontre o meio
-
+            String found = "found";
+            String notFound = "Not found";
+            String result = "";
             int middleIndex = array.length / 2;
             int middleValue = array[middleIndex];
 
             //pergunte se  o numero certo
-            if( middleValue == target){
-                return middleIndex;
-                // find a way to return a value if not found
+            if( middleValue == target) {
+                result = found;
+            } else if (array.length == 1 ) {
+                result = notFound;
+
             }
+
             //pergunte se  maior ou menor
+        if (result.equals("")) {
             if( middleValue > target){
 
-                int[] newArray = new int[middleIndex - 1];
+                int[] newArray = new int[middleIndex ];
                 System.arraycopy(array, 0, newArray, 0, middleIndex);
-                search(newArray, target);
+                result = search(newArray, target);
             }
             if( middleValue < target){
 
@@ -28,12 +34,13 @@ public class SearchUtils {
                     newArray[j] = array[i];
                     j++;
                 }
-                search(newArray, target);
+                result = search(newArray, target);
             }
-            //separe a parte certa
+        }
+        //separe a parte certa
             //repita o processo
 
-        return middleIndex;
+        return result;
     }
 
 }
